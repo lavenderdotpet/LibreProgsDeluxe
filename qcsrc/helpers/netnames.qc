@@ -14,7 +14,7 @@ string getNetname(float item_number) =
 		case IT_NAILGUN:
 			return "Nailgun";
 		case IT_SUPER_NAILGUN:
-			return "Perforator";
+			return "Super Nailgun";
 		case IT_GRENADE_LAUNCHER:
 			return "Grenade Launcher";
 		case IT_ROCKET_LAUNCHER:
@@ -41,19 +41,19 @@ string getNetname(float item_number) =
 			return "Mega Health";
 		case IT_KEY1:
 		{	if (world.worldtype == 0)
-				return "Silver key";
+				return "Silver Key";
 			if (world.worldtype == 1)
-				return "Silver runkey";
+				return "Silver Runekey";
 			if (world.worldtype == 2)
-				return "Silver keycard";
+				return "Silver Keycard";
 		}
 		case IT_KEY2:
 		{	if (world.worldtype == 0)
-				return "Gold key";
+				return "Gold Key";
 			if (world.worldtype == 1)
-				return "Gold runkey";
+				return "Gold Runekey";
 			if (world.worldtype == 2)
-				return "Gold keycard";
+				return "Gold Keycard";
 		}
 		case IT_INVISIBILITY:
 			return "Ring of Shadows";

@@ -426,7 +426,7 @@ void() monster_wizard =
 	//gnounc
 	self.noise = "wizard/wsight.wav";	//gnounc
 	self.netname = "Scrag";
-	self.killstring = " was scragged by a Scrag\n";
+	self.killstring = LOC_DEATH_WIZARD;
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 80;

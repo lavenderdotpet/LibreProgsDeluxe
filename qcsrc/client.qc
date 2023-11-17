@@ -193,13 +193,13 @@ void() ExitIntermission =
 			if (!cvar("registered"))
 			{
 				WriteByte (MSG_ALL, SVC_FINALE);
-				WriteString (MSG_ALL, "As the corpse of the monstrous entity\nChthon sinks back into the lava whence\nit rose, you grip the Rune of Earth\nMagic tightly. Now that you have\nconquered the Dimension of the Doomed,\nrealm of Earth Magic, you are ready to\ncomplete your task in the other three\nhaunted lands of Quake. Or are you? If\nyou don't register Quake, you'll never\nknow what awaits you in the Realm of\nBlack Magic, the Netherworld, and the\nElder World!");
+				WriteString (MSG_ALL, LOC_EPILOGUE_1_FREEWARE);
 			}
 	
 			else
 			{
 				WriteByte (MSG_ALL, SVC_FINALE);
-				WriteString (MSG_ALL, "As the corpse of the monstrous entity\nChthon sinks back into the lava whence\nit rose, you grip the Rune of Earth\nMagic tightly. Now that you have\nconquered the Dimension of the Doomed,\nrealm of Earth Magic, you are ready to\ncomplete your task. A Rune of magic\npower lies at the end of each haunted\nland of Quake. Go forth, seek the\ntotality of the four Runes!");
+				WriteString (MSG_ALL, LOC_EPILOGUE_1);
 			}
 	
 			return;
@@ -212,7 +212,7 @@ void() ExitIntermission =
 			WriteByte (MSG_ALL, 3);
 
 			WriteByte (MSG_ALL, SVC_FINALE);
-			WriteString (MSG_ALL, "The Rune of Black Magic throbs evilly in\nyour hand and whispers dark thoughts\ninto your brain. You learn the inmost\nlore of the Hell-Mother; Shub-Niggurath!\nYou now know that she is behind all the\nterrible plotting which has led to so\nmuch death and horror. But she is not\ninviolate! Armed with this Rune, you\nrealize that once all four Runes are\ncombined, the gate to Shub-Niggurath's\nPit will open, and you can face the\nWitch-Goddess herself in her frightful\notherworld cathedral.");
+			WriteString (MSG_ALL, LOC_EPILOGUE_2);
 	
 			return;
 		}
@@ -224,7 +224,7 @@ void() ExitIntermission =
 			WriteByte (MSG_ALL, 3);
 
 			WriteByte (MSG_ALL, SVC_FINALE);
-			WriteString (MSG_ALL, "The charred viscera of diabolic horrors\nbubble viscously as you seize the Rune\nof Hell Magic. Its heat scorches your\nhand, and its terrible secrets blight\nyour mind. Gathering the shreds of your\ncourage, you shake the devil's shackles\nfrom your soul, and become ever more\nhard and determined to destroy the\nhideous creatures whose mere existence\nthreatens the souls and psyches of all\nthe population of Earth.");
+			WriteString (MSG_ALL, LOC_EPILOGUE_3);
 	
 			return;
 		}
@@ -236,7 +236,7 @@ void() ExitIntermission =
 			WriteByte (MSG_ALL, 3);
 
 			WriteByte (MSG_ALL, SVC_FINALE);
-			WriteString (MSG_ALL, "Despite the awful might of the Elder\nWorld, you have achieved the Rune of\nElder Magic, capstone of all types of\narcane wisdom. Beyond good and evil,\nbeyond life and death, the Rune\npulsates, heavy with import. Patient and\npotent, the Elder Being Shub-Niggurath\nweaves her dire plans to clear off all\nlife from the Earth, and bring her own\nfoul offspring to our world! For all the\ndwellers in these nightmare dimensions\nare her descendants! Once all Runes of\nmagic power are united, the energy\nbehind them will blast open the Gateway\nto Shub-Niggurath, and you can travel\nthere to foil the Hell-Mother's plots\nin person.");
+			WriteString (MSG_ALL, LOC_EPILOGUE_4);
 	
 			return;
 		}
@@ -256,7 +256,7 @@ void() ExitIntermission =
 		if ( (serverflags&15) == 15)
 		{
 			WriteByte (MSG_ALL, SVC_FINALE);
-			WriteString (MSG_ALL, "Now, you have all four Runes. You sense\ntremendous invisible forces moving to\nunseal ancient barriers. Shub-Niggurath\nhad hoped to use the Runes Herself to\nclear off the Earth, but now instead,\nyou will use them to enter her home and\nconfront her as an avatar of avenging\nEarth-life. If you defeat her, you will\nbe remembered forever as the savior of\nthe planet. If she conquers, it will be\nas if you had never been born.");
+			WriteString (MSG_ALL, LOC_EPILOGUE_RUNES);
 	
 			return;
 		}
@@ -333,7 +333,8 @@ void() changelevel_touch =
 	}
 
 	bprint (other.netname);
-	bprint (" exited the level\n");
+	bprint (LOC_EXIT);
+	bprint ("\n");
 	
 	nextmap = self.map;
 
@@ -366,7 +367,7 @@ void() trigger_changelevel =
 
 	//gnounc
 	self.netname = "changelevel";
-	self.killstring = " tried to leave\n";
+	self.killstring = LOC_DEATH_LEAVE;
 	
 	InitTrigger ();
 	self.touch = changelevel_touch;
@@ -421,7 +422,8 @@ Player entered the suicide command
 void() ClientKill =
 {
 	bprint (self.netname);
-	bprint (" suicides\n");
+	bprint (LOC_DEATH_SUICIDE);
+	bprint ("\n");
 	set_suicide_frame ();
 	self.modelindex = modelindex_player;
 	self.frags = self.frags - 2;	// extra penalty
@@ -1074,7 +1076,8 @@ void() CheckPowerups =
 		{
 			if (self.invisible_time == 1)
 			{
-				sprint (self, "Ring of Shadows magic is fading\n");
+				sprint (self, LOC_RING_FADE);
+				sprint (self, "\n");
 				stuffcmd (self, "bf\n");
 				sound (self, CHAN_AUTO, "items/inv2.wav", 1, ATTN_NORM);
 				self.invisible_time = time + 1;
@@ -1110,7 +1113,8 @@ void() CheckPowerups =
 		{
 			if (self.invincible_time == 1)
 			{
-				sprint (self, "Protection is almost burned out\n");
+				sprint (self, LOC_PENT_FADE);
+				sprint (self, "\n");
 				stuffcmd (self, "bf\n");
 				sound (self, CHAN_AUTO, "items/protect2.wav", 1, ATTN_NORM);
 				self.invincible_time = time + 1;
@@ -1145,7 +1149,8 @@ void() CheckPowerups =
 		{
 			if (self.super_time == 1)
 			{
-				sprint (self, "Quad Damage is wearing off\n");
+				sprint (self, LOC_QUAD_FADE);
+				sprint (self, "\n");
 				stuffcmd (self, "bf\n");
 				sound (self, CHAN_AUTO, "items/damage2.wav", 1, ATTN_NORM);
 				self.super_time = time + 1;
@@ -1181,7 +1186,8 @@ void() CheckPowerups =
 		{
 			if (self.rad_time == 1)
 			{
-				sprint (self, "Air supply in Biosuit expiring\n");
+				sprint (self, LOC_BIO_FADE);
+				sprint (self, "\n");
 				stuffcmd (self, "bf\n");
 				sound (self, CHAN_AUTO, "items/suit2.wav", 1, ATTN_NORM);
 				self.rad_time = time + 1;
@@ -1228,9 +1234,9 @@ void() PlayerPostThink =
 	
 		else if (self.jump_flag < -650)
 		{
+			self.deathtype = "falling"; // Moved up so it happens before damage	// ZungryWare
 			T_Damage (self, world, world, 5); 
 			sound (self, CHAN_VOICE, "player/land2.wav", 1, ATTN_NORM);
-			self.deathtype = "falling";
 		}
 	
 		else
@@ -1254,7 +1260,8 @@ called when a player connects to a server
 void() ClientConnect =
 {
 	bprint (self.netname);
-	bprint (" entered the game\n");
+	bprint (LOC_JOIN);
+	bprint ("\n");
 
 	// a client connecting during an intermission can cause problems
 	if (intermission_running)
@@ -1277,9 +1284,10 @@ void() ClientDisconnect =
 
 	// let everyone else know
 	bprint (self.netname);
-	bprint (" left the game with ");
+	bprint (LOC_EXIT_DM_A);
 	bprint (ftos(self.frags));
-	bprint (" frags\n");
+	bprint (LOC_EXIT_DM_B);
+	bprint ("\n");
 	sound (self, CHAN_BODY, "player/tornoff2.wav", 1, ATTN_NONE);
 	set_suicide_frame ();
 };
@@ -1292,6 +1300,7 @@ called when a player dies
 void(entity targ, entity attacker) ClientObituary =
 {
 	local	float rnum;
+	local	float rnum2;
 	local	string deathstring, deathstring2;
 	deathstring = deathstring2 = string_null;
 	// From GPL QW source
@@ -1308,8 +1317,9 @@ void(entity targ, entity attacker) ClientObituary =
 		if (attacker.classname == "teledeath")
 		{
 			bprint (targ.netname);
-			bprint (" was telefragged by ");
+			bprint (LOC_DEATH_TELEFRAG_A);
 			bprint (attacker.owner.netname);
+			bprint (LOC_DEATH_TELEFRAG_B);
 			bprint ("\n");
 
 			attacker.owner.frags = attacker.owner.frags + 1;
@@ -1319,9 +1329,12 @@ void(entity targ, entity attacker) ClientObituary =
 
 		if (attacker.classname == "teledeath2")
 		{
-			bprint ("Satan's power deflects ");
+			bprint (LOC_DEATH_DEFLECT_A);
 			bprint (targ.netname);
-			bprint ("'s telefrag\n");
+			bprint (LOC_DEATH_DEFLECT_B);
+			bprint (attacker.owner.netname);
+			bprint (LOC_DEATH_DEFLECT_C);
+			bprint ("\n");
 
 			targ.frags = targ.frags - 1;
 
@@ -1339,41 +1352,49 @@ void(entity targ, entity attacker) ClientObituary =
 				if (targ.weapon == 64 && targ.waterlevel > 1)
 				{
 					if (targ.watertype == CONTENT_SLIME)
-						bprint (" discharges into the slime\n");
+						bprint (LOC_DEATH_DISCHARGE_SLIME);
 
 					else if (targ.watertype == CONTENT_LAVA)
-						bprint (" discharges into the lava\n");
+						bprint (LOC_DEATH_DISCHARGE_LAVA);
 
 					else
-						bprint (" discharges into the water.\n");
+						bprint (LOC_DEATH_DISCHARGE_WATER);
 
+					bprint ("\n");
 					return;
 				}
-				if (targ.weapon == 16)
-					bprint (" tries to put the pin back in\n");
-				else if (rnum)
-					bprint (" becomes bored with life\n");
-				else
-					bprint (" checks if his weapon is loaded\n");
+				if (targ.weapon == 16) {
+					bprint (LOC_DEATH_SELF_GRENADE);
+					bprint ("\n");
+				}
+				else if (targ.weapon == 32) {
+					bprint (LOC_DEATH_SELF_ROCKET);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_SELF_OTHER);
+					bprint ("\n");
+				}
 				return;
 			}
 			else if ( (teamplay == 2) && (targteam == attackerteam) &&
 				(attackerteam != 0) )	// gb
 			{
 				if (rnum < 0.25)
-					deathstring = " mows down a teammate\n";
+					deathstring = LOC_TEAMKILL_1;
 
 				else if (rnum < 0.50)
-					deathstring = " checks his glasses\n";
+					deathstring = LOC_TEAMKILL_2;
 
 				else if (rnum < 0.75)
-					deathstring = " gets a frag for the other team\n";
+					deathstring = LOC_TEAMKILL_3;
 
 				else
-					deathstring = " loses another friend\n";
+					deathstring = LOC_TEAMKILL_4;
 
 				bprint (attacker.netname);
 				bprint (deathstring);
+				bprint ("\n");
 				attacker.frags = attacker.frags - 1;
 				return;
 			}
@@ -1386,98 +1407,168 @@ void(entity targ, entity attacker) ClientObituary =
 
 				if (rnum == IT_AXE)
 				{
-					deathstring = " was ax-murdered by ";
-					deathstring2 = "\n";
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_AXE_QA;
+						deathstring2 = LOC_DEATH_AXE_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_AXE_2A;
+						deathstring2 = LOC_DEATH_AXE_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_AXE_1A;
+						deathstring2 = LOC_DEATH_AXE_1B;
+					}
 				}
 
 				if (rnum == IT_SHOTGUN)
 				{
-					deathstring = " chewed on ";
-					deathstring2 = "'s boomstick\n";
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_SHOTGUN_QA;
+						deathstring2 = LOC_DEATH_SHOTGUN_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_SHOTGUN_2A;
+						deathstring2 = LOC_DEATH_SHOTGUN_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_SHOTGUN_1A;
+						deathstring2 = LOC_DEATH_SHOTGUN_1B;
+					}
 				}
 
 				if (rnum == IT_SUPER_SHOTGUN)
 				{
-					deathstring = " ate 2 loads of ";
-					deathstring2 = "'s buckshot\n";
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_SUPER_SHOTGUN_QA;
+						deathstring2 = LOC_DEATH_SUPER_SHOTGUN_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_SUPER_SHOTGUN_2A;
+						deathstring2 = LOC_DEATH_SUPER_SHOTGUN_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_SUPER_SHOTGUN_1A;
+						deathstring2 = LOC_DEATH_SUPER_SHOTGUN_1B;
+					}
 				}
 
 				if (rnum == IT_NAILGUN)
 				{
-					deathstring = " was nailed by ";
-					deathstring2 = "\n";
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_NAILGUN_QA;
+						deathstring2 = LOC_DEATH_NAILGUN_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_NAILGUN_2A;
+						deathstring2 = LOC_DEATH_NAILGUN_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_NAILGUN_1A;
+						deathstring2 = LOC_DEATH_NAILGUN_1B;
+					}
 				}
 
 				if (rnum == IT_SUPER_NAILGUN)
 				{
-					deathstring = " was punctured by ";
-					deathstring2 = "\n";
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_SUPER_NAILGUN_QA;
+						deathstring2 = LOC_DEATH_SUPER_NAILGUN_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_SUPER_NAILGUN_2A;
+						deathstring2 = LOC_DEATH_SUPER_NAILGUN_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_SUPER_NAILGUN_1A;
+						deathstring2 = LOC_DEATH_SUPER_NAILGUN_1B;
+					}
 				}
 
 				if (rnum == IT_GRENADE_LAUNCHER)
 				{
-					deathstring = " eats ";
-					deathstring2 = "'s pineapple\n";
-
-					if (targ.health < -40)
+					if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_GRENADE_LAUNCHER_QA;
+						deathstring2 = LOC_DEATH_GRENADE_LAUNCHER_QB;
+					}
+					else if (targ.health < -40)
 					{
-						deathstring = " was gibbed by ";
-						deathstring2 = "'s grenade\n";
+						deathstring = LOC_DEATH_GRENADE_LAUNCHER_GA;
+						deathstring2 = LOC_DEATH_GRENADE_LAUNCHER_GB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_GRENADE_LAUNCHER_2A;
+						deathstring2 = LOC_DEATH_GRENADE_LAUNCHER_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_GRENADE_LAUNCHER_1A;
+						deathstring2 = LOC_DEATH_GRENADE_LAUNCHER_1B;
 					}
 				}
 
 				if (rnum == IT_ROCKET_LAUNCHER)
 				{
-					if (attacker.super_damage_finished > 0 && targ.health < -40)
-					{
-						rnum = random();
-
-						if (rnum < 0.3)
-							deathstring = " was brutalized by ";
-
-						else if (rnum < 0.6)
-							deathstring = " was smeared by ";
-
-						else
-						{
-							bprint (attacker.netname);
-							bprint (" rips ");
-							bprint (targ.netname);
-							bprint (" a new one\n");
-
-							return;
+					if (attacker.super_damage_finished > 0) {
+						rnum2 = random();
+						if (rnum2 < 0.33) {
+							deathstring = LOC_DEATH_ROCKET_LAUNCHER_Q1A;
+							deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_Q1B;
 						}
-						deathstring2 = "'s quad rocket\n";
+						else if (rnum2 < 0.66) {
+							deathstring = LOC_DEATH_ROCKET_LAUNCHER_Q2A;
+							deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_Q2B;
+						}
+						else {
+							deathstring = LOC_DEATH_ROCKET_LAUNCHER_Q3A;
+							deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_Q3B;
+						}
 					}
-
-					else
+					else if (targ.health < -40)
 					{
-						deathstring = " rides ";
-						deathstring2 = "'s rocket\n";
-
-						if (targ.health < -40)
-						{
-							deathstring = " was gibbed by ";
-							deathstring2 = "'s rocket\n" ;
-						}
+						deathstring = LOC_DEATH_ROCKET_LAUNCHER_GA;
+						deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_GA;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_ROCKET_LAUNCHER_2A;
+						deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_ROCKET_LAUNCHER_1A;
+						deathstring2 = LOC_DEATH_ROCKET_LAUNCHER_1B;
 					}
 				}
 
 				if (rnum == IT_LIGHTNING)
-				{
-					deathstring = " accepts ";
-
-					if (attacker.waterlevel > 1)
-						deathstring2 = "'s discharge\n";
-
-					else
-						deathstring2 = "'s shaft\n";
+				{	
+					if (attacker.waterlevel > 1) {
+						if (random() < 0.5) {
+							deathstring = LOC_DEATH_LIGHTNING_D1A;
+							deathstring2 = LOC_DEATH_LIGHTNING_D1B;
+						}
+						else {
+							deathstring = LOC_DEATH_LIGHTNING_D2A;
+							deathstring2 = LOC_DEATH_LIGHTNING_D2B;
+						}
+					}
+					else if (attacker.super_damage_finished > 0) {
+						deathstring = LOC_DEATH_LIGHTNING_QA;
+						deathstring2 = LOC_DEATH_LIGHTNING_QB;
+					}
+					else if (random() < 0.01) {
+						deathstring = LOC_DEATH_LIGHTNING_2A;
+						deathstring2 = LOC_DEATH_LIGHTNING_2B;
+					}
+					else {
+						deathstring = LOC_DEATH_LIGHTNING_1A;
+						deathstring2 = LOC_DEATH_LIGHTNING_1B;
+					}
 				}
 
 				bprint (targ.netname);
 				bprint (deathstring);
 				bprint (attacker.netname);
 				bprint (deathstring2);
+				bprint ("\n");
 			}
 			return;
 		}
@@ -1490,23 +1581,34 @@ void(entity targ, entity attacker) ClientObituary =
 
 			if (rnum == -3)
 			{
-				if (random() < 0.5)
-					bprint (" sleeps with the fishes\n");
-
-				else
-					bprint (" sucks it down\n");
+				// Reroll rnum to select death string
+				rnum = random();
+				if (rnum < 0.33) {
+					bprint (LOC_DEATH_DROWN1);
+					bprint ("\n");
+				}
+				else if (rnum < 0.66) {
+					bprint (LOC_DEATH_DROWN2);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_DROWN3);
+					bprint ("\n");
+				}
 
 				return;
 			}
 
 			else if (rnum == -4)
 			{
-				if (random() < 0.5)
-					bprint (" gulped a load of slime\n");
-
-				else
-					bprint (" can't exist on slime alone\n");
-
+				if (random() < 0.5) {
+					bprint (LOC_DEATH_SLIME1);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_SLIME2);
+					bprint ("\n");
+				}
 				return;
 			}
 
@@ -1514,29 +1616,40 @@ void(entity targ, entity attacker) ClientObituary =
 			{
 				if (targ.health < -15)
 				{
-					bprint (" burst into flames\n");
+					bprint (LOC_DEATH_LAVA3);
+					bprint ("\n");
 					return;
 				}
 
-				if (random() < 0.5)
-					bprint (" turned into hot slag\n");
-
-				else
-					bprint (" visits the Volcano God\n");
-
+				if (random() < 0.5) {
+					bprint (LOC_DEATH_LAVA1);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_LAVA2);
+					bprint ("\n");
+				}
 				return;
 			}
 
 			if (attacker.solid == SOLID_BSP && attacker != world)
 			{	
-				bprint (" was squished\n");
+				bprint (LOC_DEATH_SQUISH);
+				bprint ("\n");
 				return;
 			}
 
 			if (targ.deathtype == "falling")
 			{
 				targ.deathtype = string_null;
-				bprint (" fell to his death\n");
+				if (random() < 0.5) {
+					bprint (LOC_DEATH_FALL_1);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_FALL_2);
+					bprint ("\n");
+				}
 				return;
 			}
 
@@ -1545,10 +1658,12 @@ void(entity targ, entity attacker) ClientObituary =
 			if(attacker.killstring != string_null)
 			{//gnounc
 				bprint (attacker.killstring);
+				bprint ("\n"); // Added since killstrings in LOC don't have \n	// ZungryWare
 				return;
 			}
 
-			bprint (" died\n");
+			bprint (LOC_DEATH_OTHER);
+			bprint ("\n");
 		}
 	}
 };

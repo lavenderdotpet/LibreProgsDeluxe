@@ -368,7 +368,7 @@ void() monster_dog =
 	//gnounc
 	self.noise = "dog/dsight.wav";	
 	self.netname = "Rottweiler";
-	self.killstring = " was mauled by a Rottweiler\n";
+	self.killstring = LOC_DEATH_DOG;
 
 	setsize (self, '-32 -32 -24', '32 32 40');
 	self.health = 25;

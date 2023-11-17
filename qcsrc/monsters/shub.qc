@@ -249,7 +249,7 @@ void() finale_4 =
 
 	// start the end text
 	WriteByte (MSG_ALL, SVC_FINALE);
-	WriteString (MSG_ALL, "Congratulations and well done! You have\nbeaten the hideous Shub-Niggurath, and\nher hundreds of ugly changelings and\nmonsters. You have proven that your\nskill and your cunning are greater than\nall the powers of Quake. You are the\nmaster now. Id Software salutes you.");
+	WriteString (MSG_ALL, LOC_EPILOGUE_FINALE);
 
 // put a player model down
 	n = spawn();
@@ -298,7 +298,7 @@ void() monster_oldone =
 	//gnounc
 	setmodel (self, "progs/oldone.mdl");
 	self.netname = "Shub-Niggurath";
-	self.killstring = " became one with Shub-Niggurath\n";
+	self.killstring = LOC_DEATH_OLDONE;
 
 	setsize (self, '-160 -128 -24', '160 128 256');
 

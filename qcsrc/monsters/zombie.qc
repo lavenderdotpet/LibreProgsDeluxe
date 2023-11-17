@@ -530,7 +530,7 @@ void() monster_zombie =
 	//gnounc
 	self.noise = "zombie/z_idle.wav";	//gnounc
 	self.netname = "zombie";
-	self.killstring = " joins the Zombies\n";
+	self.killstring = LOC_DEATH_ZOMBIE;
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 60;

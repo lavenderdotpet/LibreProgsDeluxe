@@ -267,7 +267,7 @@ void() monster_shalrath =
 	//gnounc
 	self.noise = "shalrath/sight.wav";	//gnounc
 	self.netname = "Vore";
-	self.killstring = " was exploded by a Vore\n";
+	self.killstring = LOC_DEATH_SHALRATH;
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 400;

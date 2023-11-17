@@ -534,7 +534,7 @@ void() monster_ogre =
 	//gnounc
 	self.noise = "ogre/ogwake.wav";	//gnounc
 	self.netname = "Ogre";
-	self.killstring = " was destroyed by an Ogre\n";
+	self.killstring = LOC_DEATH_OGRE;
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 200;

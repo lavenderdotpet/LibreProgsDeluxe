@@ -411,7 +411,7 @@ void() monster_shambler =
 	//gnounc
 	self.noise = "shambler/ssight.wav";	//gnounc
 	self.netname = "Shambler";
-	self.killstring = " was smashed by a Shambler\n";
+	self.killstring = LOC_DEATH_SHAMBLER;
 
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);

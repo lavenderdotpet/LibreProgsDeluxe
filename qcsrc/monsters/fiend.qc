@@ -228,7 +228,7 @@ void() monster_demon1 =
 	//gnounc
 	setmodel (self, "progs/demon.mdl");
 	self.noise = "demon/sight2.wav";
-	self.killstring = " was eviscerated by a Fiend\n";
+	self.killstring = LOC_DEATH_DEMON1;
 
 	setsize (self, VEC_HULL2_MIN, VEC_HULL2_MAX);
 	self.health = 300;

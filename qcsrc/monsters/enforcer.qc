@@ -376,7 +376,7 @@ void() monster_enforcer =
 
 	//gnounc
 	self.netname = "enforcer";
-	self.killstring = " was blasted by an Enforcer\n";
+	self.killstring = LOC_DEATH_ENFORCER;
 	self.noise = "enforcer/sight1.wav";	//gnounc
 	self.noise1 = "enforcer/sight2.wav";	//gnounc
 	self.noise2 = "enforcer/sight3.wav";	//gnounc

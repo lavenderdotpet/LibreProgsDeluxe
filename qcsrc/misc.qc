@@ -213,7 +213,7 @@ void() misc_fireball =
 
 	//gnounc
 	self.netname = "lava ball";
-	self.killstring = " ate a lavaball\n";
+	self.killstring = LOC_DEATH_FIREBALL;
 
 	if (!self.speed)
 		self.speed = 1000;
@@ -240,7 +240,7 @@ void() fire_fly =
 
 	//gnounc
 	self.netname = "lava ball";
-	self.killstring = " ate a lavaball\n";
+	self.killstring = LOC_DEATH_FIREBALL;
 	
 	self.nextthink = time + (random() * 5) + 3;
 	self.think = fire_fly;
@@ -290,7 +290,7 @@ void() misc_explobox =
 
 	//gnounc
 	self.netname = "exploding barrel";
-	self.killstring = " blew up\n";
+	self.killstring = LOC_DEATH_EXPLO_BOX;
 
 	self.origin_z = self.origin_z + 2;
 	oldz = self.origin_z;
@@ -327,7 +327,7 @@ void() misc_explobox2 =
 
 	//gnounc
 	self.netname = "exploding barrel";
-	self.killstring = " blew up\n";
+	self.killstring = LOC_DEATH_EXPLO_BOX;
 
 	self.origin_z = self.origin_z + 2;
 	oldz = self.origin_z;
@@ -388,18 +388,22 @@ void() trap_spikeshooter =
 	
 	//gnounc
 	self.netname = "spike trap";
-	self.killstring =" was spiked\n";
+	
 
 	if (self.spawnflags & SPAWNFLAG_LASER)
 	{
+		self.killstring = LOC_DEATH_TRAP_LASER;
+
 		precache_model2 ("progs/laser.mdl");
 		
 		precache_sound2 ("enforcer/enfire.wav");
 		precache_sound2 ("enforcer/enfstop.wav");
 	}
 
-	else
+	else {
+		self.killstring = LOC_DEATH_TRAP_SPIKE;
 		precache_sound ("weapons/spike2.wav");
+	}
 };
 
 

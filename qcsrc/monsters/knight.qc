@@ -281,7 +281,7 @@ void() monster_knight =
 	//gnounc
 	self.noise = "knight/ksight.wav";	//gnounc
 	self.netname = "Knight";
-	self.killstring = " was slashed by a Knight\n";
+	self.killstring = LOC_DEATH_KNIGHT;
 
 	setsize (self, '-16 -16 -24', '16 16 40');
 	self.health = 75;

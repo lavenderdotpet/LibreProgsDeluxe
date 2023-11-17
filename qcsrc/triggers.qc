@@ -222,7 +222,7 @@ void() trigger_secret =
 	self.wait = -1;
 
 	if (!self.message)
-		self.message = "You found a secret area!";
+		self.message = LOC_SECRET;
 
 	if (!self.sounds)
 		self.sounds = 1;
@@ -256,23 +256,23 @@ void() counter_use =
 		if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
 		{
 			if (self.count >= 4)
-				centerprint (activator, "There are more to go...");
+				centerprint (activator, LOC_COUNTER_COUNT_2);
 
 			else if (self.count == 3)
-				centerprint (activator, "Only 3 more to go...");
+				centerprint3 (activator, LOC_COUNTER_COUNT_1A, "3", LOC_COUNTER_COUNT_1B);
 
 			else if (self.count == 2)
-				centerprint (activator, "Only 2 more to go...");
+				centerprint3 (activator, LOC_COUNTER_COUNT_1A, "2", LOC_COUNTER_COUNT_1B);
 
 			else
-				centerprint (activator, "Only 1 more to go...");
+				centerprint3 (activator, LOC_COUNTER_COUNT_1A, "1", LOC_COUNTER_COUNT_1B);
 		}
 
 		return;
 	}
 	
 	if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
-		centerprint(activator, "Sequence completed!");
+		centerprint(activator, LOC_COUNTER_COMPLETE);
 
 	self.enemy = activator;
 	multi_trigger ();
