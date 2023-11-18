@@ -805,7 +805,7 @@ void() PlayerDeathThink =
 	}
 
 	// Anti-stall: If the player has been dead for too long, auto-respawn them against their will
-	if (time > self.search_time + 10) {
+	if (deathmatch && (time > self.search_time + 10)) {
 		respawn();
 		return;
 	}
