@@ -8,3 +8,7 @@ progs.src
 *.dat
 *.lno
 *.src
+*.png
+*.pn
+*.sav
+*.cfg
