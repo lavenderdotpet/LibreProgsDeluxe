@@ -1272,7 +1272,7 @@ void() powerup_touch =
 			self.nextthink = time + 60;
 		
 		self.think = SUB_regen;
-	}	
+	}
 
 	sound (other, CHAN_AUTO, self.noise, 1, ATTN_NORM);
 	stuffcmd (other, "bf\n");
