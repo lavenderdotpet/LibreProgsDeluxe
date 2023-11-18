@@ -669,11 +669,28 @@ void() ambient_comp_hum =
 
 /*QUAKED ambient_thunder (0.3 0.1 0.6) (-10 -10 -8) (10 10 8)
 */
+void() thunder_think;
 void() ambient_thunder =
 {
 	precache_sound ("ambience/thunder1.wav");
-	ambientsound (self.origin, "ambience/thunder1.wav", 0.5, ATTN_STATIC);
+
+	if (self.targetname) {
+		self.use = thunder_think;
+	}
+	else {
+		self.nextthink = time + random()*10 + 1;
+		self.think = thunder_think;
+	}
 };
+
+void() thunder_think = {
+	sound (self, CHAN_VOICE, "ambience/thunder1.wav", 1, 0.5);
+
+	if (!self.targetname) {
+		self.nextthink = time + random()*10 + 1;
+		self.think = thunder_think;
+	}
+}
 
 /*QUAKED ambient_light_buzz (0.3 0.1 0.6) (-10 -10 -8) (10 10 8)
 */
