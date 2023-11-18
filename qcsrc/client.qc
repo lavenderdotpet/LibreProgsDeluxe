@@ -804,6 +804,12 @@ void() PlayerDeathThink =
 			self.velocity = forward * normalize(self.velocity);
 	}
 
+	// Anti-stall: If the player has been dead for too long, auto-respawn them against their will
+	if (time > self.search_time + 10) {
+		respawn();
+		return;
+	}
+
 	// wait for all buttons released
 	if (self.deadflag == DEAD_DEAD)
 	{

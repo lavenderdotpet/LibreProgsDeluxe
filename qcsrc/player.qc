@@ -29,7 +29,7 @@ PLAYER
 
 $cd /raid/quake/id1/models/player_4
 $origin 0 -6 24
-$base base		
+$base base
 $skin skin
 
 //
@@ -133,7 +133,7 @@ void()	player_stand1 =[	$axstnd1,	player_stand1	]
 		self.frame = $stand1 + self.walkframe;
 	}
 
-	self.walkframe = self.walkframe + 1;	
+	self.walkframe = self.walkframe + 1;
 };
 
 void()	player_run =[	$rockrun1,	player_run	]
@@ -167,7 +167,7 @@ void()	player_run =[	$rockrun1,	player_run	]
 };
 
 
-void()	player_shot1 =	[$shotatt1, player_shot2	] 
+void()	player_shot1 =	[$shotatt1, player_shot2	]
 {
 	self.weaponframe=1;
 	self.effects = self.effects | EF_MUZZLEFLASH;
@@ -202,7 +202,7 @@ void()	player_axed4 =	[$axattd4, player_run	] {self.weaponframe=8;};
 
 //============================================================================
 
-void() player_nail1   =[$nailatt1, player_nail2  ] 
+void() player_nail1   =[$nailatt1, player_nail2  ]
 {
 	self.effects = self.effects | EF_MUZZLEFLASH;
 
@@ -238,7 +238,7 @@ void() player_nail2   =[$nailatt2, player_nail1  ]
 
 //============================================================================
 
-void() player_light1   =[$light1, player_light2  ] 
+void() player_light1   =[$light1, player_light2  ]
 {
 	self.effects = self.effects | EF_MUZZLEFLASH;
 
@@ -275,7 +275,7 @@ void() player_light2   =[$light2, player_light1  ]
 //============================================================================
 
 
-void() player_rocket1   =[$rockatt1, player_rocket2  ] 
+void() player_rocket1   =[$rockatt1, player_rocket2  ]
 {
 	self.weaponframe=1;
 	self.effects = self.effects | EF_MUZZLEFLASH;
@@ -321,7 +321,7 @@ void() PainSound =
 		// FIX ME	put in some steam here
 		if (random() > 0.5)
 			sound (self, CHAN_VOICE, "player/lburn1.wav", 1, ATTN_NORM);
-	
+
 		else
 			sound (self, CHAN_VOICE, "player/lburn2.wav", 1, ATTN_NORM);
 
@@ -357,7 +357,7 @@ void() PainSound =
 
 		return;
 	}
-	
+
 
 	rs = rint((random() * 5) + 1);
 
@@ -451,7 +451,7 @@ void() DeathBubblesSpawn =
 void(float num_bubbles) DeathBubbles =
 {
 	local entity	bubble_spawner;
-	
+
 	bubble_spawner = spawn();
 	setorigin (bubble_spawner, self.origin);
 	bubble_spawner.movetype = MOVETYPE_NONE;
@@ -461,7 +461,7 @@ void(float num_bubbles) DeathBubbles =
 	bubble_spawner.air_finished = 0;
 	bubble_spawner.owner = self;
 	bubble_spawner.bubble_count = num_bubbles;
-	
+
 	return;
 };
 
@@ -478,7 +478,7 @@ void() DeathSound =
 
 		return;
 	}
-	
+
 	rs = rint ((random() * 4) + 1);
 
 	if (rs == 1)
@@ -589,7 +589,7 @@ void() GibPlayer =
 		sound (self, CHAN_VOICE, "player/teledth1.wav", 1, ATTN_NONE);
 		return;
 	}
-		
+
 	if (random() < 0.5)
 		sound (self, CHAN_VOICE, "player/gib.wav", 1, ATTN_NONE);
 
@@ -600,7 +600,7 @@ void() GibPlayer =
 void() PlayerDie =
 {
 	local	float	i;
-	
+
 	self.items = self.items - (self.items & IT_INVISIBILITY);
 	self.invisible_finished = 0;	// don't die as eyes
 	self.invincible_finished = 0;
@@ -610,13 +610,14 @@ void() PlayerDie =
 
 	if (deathmatch || coop)
 		DropBackpack();
-	
+
 	self.weaponmodel=string_null;
 	self.view_ofs = '0 0 -8';
 	self.deadflag = DEAD_DYING;
 	self.solid = SOLID_NOT;
 	self.flags = self.flags - (self.flags & FL_ONGROUND);
 	self.movetype = MOVETYPE_TOSS;
+	self.search_time = time; // Tracks when this player died (for auto-respawn)
 
 	if (self.velocity_z < 10)
 		self.velocity_z = self.velocity_z + random()*300;
@@ -628,21 +629,21 @@ void() PlayerDie =
 	}
 
 	DeathSound();
-	
+
 	self.angles_x = 0;
 	self.angles_z = 0;
-	
+
 	if (self.weapon == IT_AXE)
 	{
 		player_die_ax1 ();
 		return;
 	}
-	
+
 	i = cvar("temp1");
 
 	if (!i)
 		i = 1 + floor(random()*6);
-	
+
 	if (i == 1)
 		player_diea1();
 
