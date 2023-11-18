@@ -567,8 +567,12 @@ void() GrenadeTouch =
 		return;
 	}
 
-	sound (self, CHAN_WEAPON, "weapons/bounce.wav", 1, ATTN_NORM);	// bounce sound
-
+	// This check fixes the sound effect bug when a grenade is riding a descending lift
+	if (!self.count || time - self.count > 0.05) {
+		sound (self, CHAN_WEAPON, "weapons/bounce.wav", 1, ATTN_NORM);	// bounce sound
+	}
+	self.count = time;
+	
 	if (self.velocity == '0 0 0')
 		self.avelocity = '0 0 0';
 };
