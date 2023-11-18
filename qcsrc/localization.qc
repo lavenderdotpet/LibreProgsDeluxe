@@ -164,7 +164,7 @@
 #define LOC_DEATH_NAILGUN_1B	""
 #define LOC_DEATH_NAILGUN_2A	" was filled with holes by "
 #define LOC_DEATH_NAILGUN_2B	""
-#define LOC_DEATH_NAILGUN_QA	" was sent beyond the veil by "
+#define LOC_DEATH_NAILGUN_QA	"'s mortal coil was shuffled off by "
 #define LOC_DEATH_NAILGUN_QB	""
 
 #define LOC_DEATH_SUPER_NAILGUN_1A	" was perforated by "
@@ -189,11 +189,11 @@
 #define LOC_DEATH_ROCKET_LAUNCHER_2B	"'s rocket"
 #define LOC_DEATH_ROCKET_LAUNCHER_GA	" was gibbed by "
 #define LOC_DEATH_ROCKET_LAUNCHER_GB	"'s rocket"
-#define LOC_DEATH_ROCKET_LAUNCHER_Q1A	"'s mortal coil was shuffled off by "
+#define LOC_DEATH_ROCKET_LAUNCHER_Q1A	" was sent beyond the veil by "
 #define LOC_DEATH_ROCKET_LAUNCHER_Q1B	""
-#define LOC_DEATH_ROCKET_LAUNCHER_Q2A	"'s mortal coil was shuffled off by "
+#define LOC_DEATH_ROCKET_LAUNCHER_Q2A	" was sent beyond the veil by "
 #define LOC_DEATH_ROCKET_LAUNCHER_Q2B	""
-#define LOC_DEATH_ROCKET_LAUNCHER_Q3A	"'s mortal coil was shuffled off by "
+#define LOC_DEATH_ROCKET_LAUNCHER_Q3A	" was sent beyond the veil by "
 #define LOC_DEATH_ROCKET_LAUNCHER_Q3B	""
 
 #define LOC_DEATH_LIGHTNING_1A	" was electrocuted by "
