@@ -215,10 +215,9 @@ void() health_touch =
 
 	else
 	{
-		if (deathmatch != 2)		// deathmatch 2 is the silly old rules
+		if (deathmatch && deathmatch != 2)		// deathmatch 2 is the silly old rules
 		{
-			if (deathmatch)
-				self.nextthink = time + 20;
+			self.nextthink = time + 20;
 			self.think = SUB_regen;
 		}
 	}
@@ -243,7 +242,7 @@ void() item_megahealth_rot =
 	// just blindly subtract the flag off
 	other.items = other.items - (other.items & IT_SUPERHEALTH);
 
-	if (deathmatch == 1)	// deathmatch 2 is silly old rules
+	if (deathmatch && deathmatch != 2)	// deathmatch 2 is silly old rules
 	{
 		self.nextthink = time + 20;
 		self.think = SUB_regen;
@@ -301,7 +300,7 @@ void() armor_touch =
 	self.solid = SOLID_NOT;
 	self.model = string_null;
 
-	if (deathmatch == 1)
+	if (deathmatch && deathmatch != 2)
 		self.nextthink = time + 20;
 
 	self.think = SUB_regen;
@@ -479,7 +478,7 @@ void() weapon_touch =
 	best = W_BestWeapon();
 	self = stemp;
 
-	if (deathmatch == 2 || coop)
+	if (deathmatch > 1 || coop)
 		leave = 1;
 
 	else
@@ -789,7 +788,7 @@ void() ammo_touch =
 	self.model = string_null;
 	self.solid = SOLID_NOT;
 
-	if (deathmatch == 1)
+	if (deathmatch && deathmatch != 2)
 		self.nextthink = time + 30;
 
 	self.think = SUB_regen;
@@ -1316,6 +1315,10 @@ Player is invulnerable for 30 seconds
 */
 void() item_artifact_invulnerability =
 {
+	if (deathmatch == 4) {
+		return;
+	}
+
 	self.touch = powerup_touch;
 
 	precache_model ("progs/invulner.mdl");
@@ -1360,6 +1363,10 @@ Player is invisible for 30 seconds
 */
 void() item_artifact_invisibility =
 {
+	if (deathmatch == 4) {
+		return;
+	}
+
 	self.touch = powerup_touch;
 
 	precache_model ("progs/invisibl.mdl");
@@ -1383,6 +1390,10 @@ The next attack from the player will do 4x damage
 */
 void() item_artifact_super_damage =
 {
+	if (deathmatch == 4) {
+		return;
+	}
+
 	self.touch = powerup_touch;
 
 	precache_model ("progs/quaddama.mdl");
