@@ -67,10 +67,10 @@ void() multi_trigger =
 	self.takedamage = DAMAGE_NO;
 
 	activator = self.enemy;
-	
+
 	SUB_UseTargets();
 
-	if (self.wait > 0)	
+	if (self.wait > 0)
 	{
 		self.think = multi_wait;
 		self.nextthink = time + self.wait;
@@ -101,7 +101,7 @@ void() multi_touch =
 {
 	if (other.classname != "player")
 		return;
-	
+
 	// if the trigger has an angles field, check player's facing direction
 	if (self.movedir != '0 0 0')
 	{
@@ -109,7 +109,7 @@ void() multi_touch =
 		if (v_forward * self.movedir < 0)
 			return;		// not facing the right way
 	}
-	
+
 	self.enemy = other;
 	multi_trigger ();
 };
@@ -146,7 +146,7 @@ void() trigger_multiple =
 		precache_sound ("misc/trigger1.wav");
 		self.noise = "misc/trigger1.wav";
 	}
-	
+
 	if (!self.wait)
 		self.wait = 0.2;
 
@@ -226,7 +226,7 @@ void() trigger_secret =
 
 	if (!self.sounds)
 		self.sounds = 1;
-	
+
 	if (self.sounds == 1)
 	{
 		precache_sound ("misc/secret.wav");
@@ -250,7 +250,7 @@ void() counter_use =
 
 	if (self.count < 0)
 		return;
-	
+
 	if (self.count != 0)
 	{
 		if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
@@ -270,7 +270,7 @@ void() counter_use =
 
 		return;
 	}
-	
+
 	if (activator.classname == "player" && (self.spawnflags & SPAWNFLAG_NOMESSAGE) == 0)
 		centerprint(activator, LOC_COUNTER_COMPLETE);
 
@@ -364,7 +364,7 @@ void() tdeath_touch =
 			T_Damage (self.owner, self, self, 50000);
 			return;
 		}
-		
+
 	}
 
 	if (other.health)
@@ -389,7 +389,7 @@ void(vector org, entity death_owner) spawn_tdeath =
 	death.nextthink = time + 0.2;
 	death.think = SUB_Remove;
 	death.owner = death_owner;
-	
+
 	force_retouch = 2;		// make sure even still objects get hit
 };
 
@@ -492,7 +492,7 @@ void() trigger_teleport =
 	InitTrigger ();
 	self.touch = teleport_touch;
 
-	// find the destination 
+	// find the destination
 	if (!self.target)
 		objerror ("no target");
 	self.use = teleport_use;
@@ -517,7 +517,7 @@ void() trigger_skill_touch =
 {
 	if (other.classname != "player")
 		return;
-		
+
 	cvar_set ("skill", self.message);
 };
 
@@ -586,9 +586,9 @@ void() hurt_on =
 
 void() hurt_touch =
 {
-	if (other.takedamage)
+	if (other.takedamage && self.nextthink < time)
 	{
-		self.solid = SOLID_NOT;
+		// self.solid = SOLID_NOT;
 		T_Damage (other, self, self, self.dmg);
 		self.think = hurt_on;
 		self.nextthink = time + 1;
@@ -662,10 +662,10 @@ void() trigger_monsterjump_touch =
 	// set XY even if not on ground, so the jump will clear lips
 	other.velocity_x = self.movedir_x * self.speed;
 	other.velocity_y = self.movedir_y * self.speed;
-	
+
 	if ( !(other.flags & FL_ONGROUND) )
 		return;
-	
+
 	other.flags = other.flags - FL_ONGROUND;
 
 	other.velocity_z = self.height;
