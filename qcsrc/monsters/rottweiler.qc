@@ -71,7 +71,7 @@ local float 	ldmg;
 
 	if (vlen(delta) > 100)
 		return;
-		
+
 	ldmg = (random() + random() + random()) * 8;
 	T_Damage (self.enemy, self, self, ldmg);
 };
@@ -82,13 +82,19 @@ void()	Dog_JumpTouch =
 
 	if (self.health <= 0)
 		return;
-		
+
 	if (other.takedamage)
 	{
-		if ( vlen(self.velocity) > 300 )
+		if (vlen(self.velocity) > 300)
 		{
-			ldmg = 10 + 10*random();
-			T_Damage (other, self, self, ldmg);	
+			// The dog can't deal leap damage to the player immediately after already doing do.
+			// Solves some weird hit-detection issues where the dog could insta-kill players or deal multiple hits at once.
+			if (self.count < time)
+			{
+				ldmg = 10 + 10*random();
+				T_Damage (other, self, self, ldmg);
+			}
+			self.count = time + 0.3;
 		}
 	}
 
@@ -120,7 +126,7 @@ void() dog_stand7	=[	$stand7,	dog_stand8	] {ai_stand();};
 void() dog_stand8	=[	$stand8,	dog_stand9	] {ai_stand();};
 void() dog_stand9	=[	$stand9,	dog_stand1	] {ai_stand();};
 
-void() dog_walk1	=[	$walk1 ,	dog_walk2	] 
+void() dog_walk1	=[	$walk1 ,	dog_walk2	]
 {
 	if (random() < 0.2)
 		sound (self, CHAN_VOICE, "dog/idle.wav", 1, ATTN_IDLE);
@@ -135,7 +141,7 @@ void() dog_walk6	=[	$walk6 ,	dog_walk7	] {ai_walk(8);};
 void() dog_walk7	=[	$walk7 ,	dog_walk8	] {ai_walk(8);};
 void() dog_walk8	=[	$walk8 ,	dog_walk1	] {ai_walk(8);};
 
-void() dog_run1		=[	$run1  ,	dog_run2	] 
+void() dog_run1		=[	$run1  ,	dog_run2	]
 {
 	if (random() < 0.2)
 		sound (self, CHAN_VOICE, "dog/idle.wav", 1, ATTN_IDLE);
@@ -157,7 +163,7 @@ void() dog_run12	=[	$run12  ,	dog_run1	] {ai_run(32);};
 void() dog_atta1	=[	$attack1,	dog_atta2	] {ai_charge(10);};
 void() dog_atta2	=[	$attack2,	dog_atta3	] {ai_charge(10);};
 void() dog_atta3	=[	$attack3,	dog_atta4	] {ai_charge(10);};
-void() dog_atta4	=[	$attack4,	dog_atta5	] 
+void() dog_atta4	=[	$attack4,	dog_atta5	]
 {
 	sound (self, CHAN_VOICE, "dog/dattack1.wav", 1, ATTN_NORM);
 	dog_bite();
@@ -172,7 +178,7 @@ void() dog_leap1	=[	$leap1,		dog_leap2	] {ai_face();};
 void() dog_leap2	=[	$leap2,		dog_leap3	]
 {
 	ai_face();
-	
+
 	self.touch = Dog_JumpTouch;
 	makevectors2 (self.angles);
 	self.origin_z = self.origin_z + 1;
@@ -265,7 +271,7 @@ void() dog_die =
 
 	if (random() > 0.5)
 		dog_die1 ();
-	
+
 	else
 		dog_dieb1 ();
 };
@@ -300,39 +306,39 @@ float()	CheckDogJump =
 
 	if (self.origin_z + self.mins_z > self.enemy.origin_z + self.enemy.mins_z + 0.75 * self.enemy.size_z)
 		return FALSE;
-		
+
 	if (self.origin_z + self.maxs_z < self.enemy.origin_z + self.enemy.mins_z + 0.25 * self.enemy.size_z)
 		return FALSE;
-		
+
 	dist = self.enemy.origin - self.origin;
 	dist_z = 0;
-	
+
 	d = vlen(dist);
-	
+
 	if (d < 80)
 		return FALSE;
-		
+
 	if (d > 150)
 		return FALSE;
-		
+
 	return TRUE;
 };
 
 float()	DogCheckAttack =
-{	
+{
 	// if close enough for slashing, go for it
 	if (CheckDogMelee ())
 	{
 		self.attack_state = AS_MELEE;
 		return TRUE;
 	}
-	
+
 	if (CheckDogJump ())
 	{
 		self.attack_state = AS_MISSILE;
 		return TRUE;
 	}
-	
+
 	return FALSE;
 };
 
@@ -366,7 +372,7 @@ void() monster_dog =
 	setmodel (self, "progs/dog.mdl");
 
 	//gnounc
-	self.noise = "dog/dsight.wav";	
+	self.noise = "dog/dsight.wav";
 	self.netname = "Rottweiler";
 	self.killstring = LOC_DEATH_DOG;
 
