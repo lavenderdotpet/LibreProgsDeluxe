@@ -1337,7 +1337,7 @@ void(entity targ, entity attacker) ClientObituary =
 			bprint (LOC_DEATH_DEFLECT_A);
 			bprint (targ.netname);
 			bprint (LOC_DEATH_DEFLECT_B);
-			bprint (attacker.owner.netname);
+			bprint (attacker.enemy.netname);
 			bprint (LOC_DEATH_DEFLECT_C);
 			bprint ("\n");
 
