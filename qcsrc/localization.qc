@@ -91,7 +91,7 @@
 #define LOC_DEATH_DEMON1 			" was disemboweled by a Moon Rat"
 #define LOC_DEATH_WIZARD 			" was poisoned by a ???"
 #define LOC_DEATH_ZOMBIE			" was pelted by a Zombie"
-#define LOC_DEATH_KNIGHT 			" was stabbed by a ???"
+#define LOC_DEATH_KNIGHT 			" was stabbed by a Carcosan Knight"
 #define LOC_DEATH_HELL_KNIGHT 		" was gutted by a ???"
 #define LOC_DEATH_FISH 				" was nibbled by an Eel"
 #define LOC_DEATH_SHAMBLER 			" was shredded by a Scourge of the Dark"
@@ -153,10 +153,10 @@
 #define LOC_DEATH_SHOTGUN_QA	" was put six feet under by "
 #define LOC_DEATH_SHOTGUN_QB	""
 
-#define LOC_DEATH_SUPER_SHOTGUN_1A	" ate 2 loads of "
-#define LOC_DEATH_SUPER_SHOTGUN_1B	"'s buckshot"
-#define LOC_DEATH_SUPER_SHOTGUN_2A	" ate 2 loads of "
-#define LOC_DEATH_SUPER_SHOTGUN_2B	"'s buckshot"
+#define LOC_DEATH_SUPER_SHOTGUN_1A	" was blasted by "
+#define LOC_DEATH_SUPER_SHOTGUN_1B	""
+#define LOC_DEATH_SUPER_SHOTGUN_2A	" was shredded by "
+#define LOC_DEATH_SUPER_SHOTGUN_2B	""
 #define LOC_DEATH_SUPER_SHOTGUN_QA	" was sent home in a box by "
 #define LOC_DEATH_SUPER_SHOTGUN_QB	""
 

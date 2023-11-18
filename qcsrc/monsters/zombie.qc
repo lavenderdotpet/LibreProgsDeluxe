@@ -194,8 +194,8 @@ void(vector st) ZombieFireGrenade =
 
 	// calc org
 	org = self.origin + st_x * v_forward + st_y * v_right + (st_z - 24) * v_up;
-	
-	// set missile speed	
+
+	// set missile speed
 
 	makevectors2 (self.angles);
 
@@ -206,13 +206,13 @@ void(vector st) ZombieFireGrenade =
 	missile.avelocity = '3000 1000 2000';
 
 	missile.touch = ZombieGrenadeTouch;
-	
+
 	// set missile duration
 	missile.nextthink = time + 2.5;
 	missile.think = SUB_Remove;
 
 	setmodel (missile, "progs/zom_gib.mdl");
-	setsize (missile, '0 0 0', '0 0 0');		
+	setsize (missile, '0 0 0', '0 0 0');
 	setorigin (missile, org);
 };
 
@@ -262,9 +262,9 @@ void() zombie_attc12	=[	$attc12,	zombie_run1		] {ai_face();ZombieFireGrenade('-1
 void() zombie_missile =
 {
 	local float	r;
-	
+
 	r = random();
-	
+
 	if (r < 0.3)
 		zombie_atta1 ();
 
@@ -378,6 +378,8 @@ self.solid = SOLID_NOT;
 void() zombie_paine11	=[	$paine11,	zombie_paine12	] {self.nextthink = self.nextthink + 5;self.health = 60;};
 void() zombie_paine12	=[	$paine12,	zombie_paine13	]
 {
+	local entity t;
+	local float shouldKill;
 
 	// see if ok to stand up
 	self.health = 60;
@@ -386,8 +388,42 @@ void() zombie_paine12	=[	$paine12,	zombie_paine13	]
 
 	if (!walkmove (0, 0))
 	{
+		self.count = self.count + 1;
+		if (self.count > 5)
+		{
+			// This is a fix for the bug where zombies sometimes will be stuck in their fallen state infinitely due to sloped geometry
+			// If they fail to revive 5 times, put them out of their misery
+			// Only works if no players are within a certain distance of it, so you can't just stand on top of the zombie to kill it
+			t = world;
+			shouldKill = 1;
+			while (1)
+			{
+				// Go through each player
+				t = nextent(t);
+				if (t.classname != "player")
+					break;
+
+				// Check to make sure the player isn't close by
+				if (vlen(t.origin - self.origin) < 128)
+				{
+					shouldKill = 0;
+					break;
+				}
+			}
+			// If all players are a certain distance away, kill the zombie.
+			if (shouldKill)
+			{
+				self.count = 0;
+				T_Damage(self, self, self, 60);
+				return;
+			}
+		}
 		self.think = zombie_paine11;
 		self.solid = SOLID_NOT;
+		return;
+	}
+	else {
+		self.count = 0;
 		return;
 	}
 };
@@ -457,14 +493,14 @@ void(entity attacker, float take) zombie_pain =
 		zombie_paine1 ();
 		return;
 	}
-	
+
 	if (self.inpain)
 	{
 		// if hit again in next gre seconds while not in pain frames, definately drop
 		self.pain_finished = time + 3;
 		return;			// currently going through an animation, don't change
 	}
-	
+
 	if (self.pain_finished > time)
 	{
 		// hit again, so drop down
@@ -473,7 +509,7 @@ void(entity attacker, float take) zombie_pain =
 		return;
 	}
 
-	// gp into one of the fast pain animations	
+	// gp into one of the fast pain animations
 	self.inpain = 1;
 
 	r = random();
