@@ -1346,6 +1346,46 @@ void(entity targ, entity attacker) ClientObituary =
 			return;
 		}
 
+		if (attacker.classname == "trigger_hurt")
+		{
+			// Custom death messages for trigger_hurt
+			if (attacker.dmg == 666000) {
+				bprint(targ.netname);
+
+				if (random() < 0.01)
+					bprint(LOC_DEATH_FALL_2);
+				else
+					bprint(LOC_DEATH_FALL_1);
+
+				bprint("\n");
+				return;
+			}
+
+			if (attacker.dmg == 666001) {
+				bprint(targ.netname);
+
+				if (random() < 0.01)
+					bprint(LOC_DEATH_SPACE_2);
+				else
+					bprint(LOC_DEATH_SPACE_1);
+
+				bprint("\n");
+				return;
+			}
+
+			if (attacker.dmg == 666002) {
+				bprint(targ.netname);
+
+				if (random() < 0.01)
+					bprint(LOC_DEATH_VOID_2);
+				else
+					bprint(LOC_DEATH_VOID_1);
+
+				bprint("\n");
+				return;
+			}
+		}
+
 		if (attacker.classname == "player")
 		{
 			if (targ == attacker)
@@ -1647,12 +1687,12 @@ void(entity targ, entity attacker) ClientObituary =
 			if (targ.deathtype == "falling")
 			{
 				targ.deathtype = string_null;
-				if (random() < 0.5) {
-					bprint (LOC_DEATH_FALL_1);
+				if (random() < 0.01) {
+					bprint (LOC_DEATH_FALL_2);
 					bprint ("\n");
 				}
 				else {
-					bprint (LOC_DEATH_FALL_2);
+					bprint (LOC_DEATH_FALL_1);
 					bprint ("\n");
 				}
 				return;
