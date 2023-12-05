@@ -3,11 +3,8 @@
 /temp/langaugeTranslations
 /temp/done
 /output
-progs.src
 *.exe
-*.dat
 *.lno
-*.src
 *.png
 *.pn
 *.sav
