@@ -1098,7 +1098,7 @@ void() CheatCommand =
 		IT_ROCKET_LAUNCHER |
 		IT_KEY1 | IT_KEY2;
 
-	self.ammo_cells = 200;
+	self.ammo_cells = 100;
 	self.items = self.items | IT_LIGHTNING;
 
 	self.weapon = IT_ROCKET_LAUNCHER;

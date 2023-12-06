@@ -262,16 +262,16 @@ void() FoundTarget =
 
 		rsnd = rint(random() * 3);
 		if (rsnd == 1)
-			sound (self, CHAN_VOICE, self.noise, 1, ATTN_NORM);
+			sound (self, CHAN_BODY, self.noise, 1, ATTN_NORM);
 		else if (rsnd == 2)
-			sound (self, CHAN_VOICE, self.noise1, 1, ATTN_NORM);
+			sound (self, CHAN_BODY, self.noise1, 1, ATTN_NORM);
 		else if (rsnd == 0)
-			sound (self, CHAN_VOICE, self.noise2, 1, ATTN_NORM);
+			sound (self, CHAN_BODY, self.noise2, 1, ATTN_NORM);
 		else
-			sound (self, CHAN_VOICE, self.noise4, 1, ATTN_NORM);
+			sound (self, CHAN_BODY, self.noise4, 1, ATTN_NORM);
 	}
 	else
-			sound (self, CHAN_VOICE, self.noise, 1, ATTN_NORM);
+			sound (self, CHAN_BODY, self.noise, 1, ATTN_NORM);
 
 	HuntTarget ();
 };
