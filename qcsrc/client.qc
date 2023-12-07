@@ -914,6 +914,7 @@ void() WaterMove =
 			if (self.dmg > 15)
 				self.dmg = 10;
 
+			self.deathtype = "drowning";
 			T_Damage (self, world, world, self.dmg);
 			self.pain_finished = time + 1;
 		}
@@ -941,6 +942,7 @@ void() WaterMove =
 			else
 				self.dmgtime = time + 0.2;
 
+			self.deathtype = "lava";
 			T_Damage (self, world, world, 10*self.waterlevel);
 		}
 	}
@@ -949,6 +951,7 @@ void() WaterMove =
 		if (self.dmgtime < time && self.radsuit_finished < time)
 		{
 			self.dmgtime = time + 1;
+			self.deathtype = "slime";
 			T_Damage (self, world, world, 4*self.waterlevel);
 		}
 	}
@@ -1626,62 +1629,7 @@ void(entity targ, entity attacker) ClientObituary =
 		else
 		{
 			targ.frags = targ.frags - 1;		// killed self
-			rnum = targ.watertype;
-
 			bprint (targ.netname);
-
-			if (rnum == -3)
-			{
-				// Reroll rnum to select death string
-				rnum = random();
-				if (rnum < 0.33) {
-					bprint (LOC_DEATH_DROWN1);
-					bprint ("\n");
-				}
-				else if (rnum < 0.66) {
-					bprint (LOC_DEATH_DROWN2);
-					bprint ("\n");
-				}
-				else {
-					bprint (LOC_DEATH_DROWN3);
-					bprint ("\n");
-				}
-
-				return;
-			}
-
-			else if (rnum == -4)
-			{
-				if (random() < 0.5) {
-					bprint (LOC_DEATH_SLIME1);
-					bprint ("\n");
-				}
-				else {
-					bprint (LOC_DEATH_SLIME2);
-					bprint ("\n");
-				}
-				return;
-			}
-
-			else if (rnum == -5)
-			{
-				if (targ.health < -15)
-				{
-					bprint (LOC_DEATH_LAVA3);
-					bprint ("\n");
-					return;
-				}
-
-				if (random() < 0.5) {
-					bprint (LOC_DEATH_LAVA1);
-					bprint ("\n");
-				}
-				else {
-					bprint (LOC_DEATH_LAVA2);
-					bprint ("\n");
-				}
-				return;
-			}
 
 			if (attacker.solid == SOLID_BSP && attacker != world)
 			{
@@ -1699,6 +1647,57 @@ void(entity targ, entity attacker) ClientObituary =
 				}
 				else {
 					bprint (LOC_DEATH_FALL_1);
+					bprint ("\n");
+				}
+				return;
+			}
+
+			if (targ.deathtype == "drowning")
+			{
+				rnum = random();
+				if (rnum < 0.33) {
+					bprint (LOC_DEATH_DROWN1);
+					bprint ("\n");
+				}
+				else if (rnum < 0.66) {
+					bprint (LOC_DEATH_DROWN2);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_DROWN3);
+					bprint ("\n");
+				}
+				return;
+			}
+
+			if (targ.deathtype == "slime")
+			{
+				if (random() < 0.5) {
+					bprint (LOC_DEATH_SLIME1);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_SLIME2);
+					bprint ("\n");
+				}
+				return;
+			}
+
+			if (targ.deathtype == "lava")
+			{
+				if (targ.health < -15)
+				{
+					bprint (LOC_DEATH_LAVA3);
+					bprint ("\n");
+					return;
+				}
+
+				if (random() < 0.5) {
+					bprint (LOC_DEATH_LAVA1);
+					bprint ("\n");
+				}
+				else {
+					bprint (LOC_DEATH_LAVA2);
 					bprint ("\n");
 				}
 				return;
