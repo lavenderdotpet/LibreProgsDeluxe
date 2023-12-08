@@ -674,7 +674,7 @@ void() ambient_thunder =
 {
 	precache_sound ("ambience/thunder1.wav");
 
-	if (self.targetname) {
+	if (self.targetname != string_null) {
 		self.use = thunder_think;
 	}
 	else {
