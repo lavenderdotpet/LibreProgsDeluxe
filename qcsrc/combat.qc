@@ -130,9 +130,13 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 	local	entity	oldself;
 	local	float	save;
 	local	float	take;
+	local string temp_deathtype;
 
 	if (!targ.takedamage)
 		return;
+
+	temp_deathtype = targ.deathtype;
+	targ.deathtype = string_null;
 
 	//gnounc -- shub kill crash fix.
 	if (targ.classname == "monster_oldone" && damage < 9999)
@@ -200,6 +204,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 
 	if (targ.health <= 0)
 	{
+		targ.deathtype = temp_deathtype;
 		Killed (targ, attacker);
 		return;
 	}

@@ -633,7 +633,6 @@ void() W_FireGrenade =
 void() spike_touch;
 void() superspike_touch;
 
-
 /*
 ===============
 launch_spike
