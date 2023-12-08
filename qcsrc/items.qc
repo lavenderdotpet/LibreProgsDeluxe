@@ -1176,9 +1176,9 @@ void() sigil_touch =
 	else if (self.spawnflags & 8)
 		msg = LOC_RUNE_4;
 	else
-		msg = "";
+		msg = string_null;
 
-	if (msg != "") {
+	if (msg != string_null) {
 		bprint (other.netname);
 		bprint (msg);
 		bprint ("\n");
