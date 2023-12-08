@@ -1175,11 +1175,15 @@ void() sigil_touch =
 		msg = LOC_RUNE_3;
 	else if (self.spawnflags & 8)
 		msg = LOC_RUNE_4;
+	else
+		msg = string_null;
 
-	bprint (other.netname);
-	bprint (msg);
-	bprint ("\n");
-	centerprint2 (other, LOC_RUNE_YOU, msg);
+	if (msg != string_null) {
+		bprint (other.netname);
+		bprint (msg);
+		bprint ("\n");
+		centerprint2 (other, LOC_RUNE_YOU, msg);
+	} 
 
 	sound (other, CHAN_ITEM, self.noise, 1, ATTN_NORM);
 	stuffcmd (other, "bf\n");
