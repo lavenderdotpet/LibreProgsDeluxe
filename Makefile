@@ -1,4 +1,4 @@
-QCC=fteqcc -Wall
+QCC=fteqcc -Wall -O2
 
 vanilla:
 	-mkdir output
