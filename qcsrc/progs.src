@@ -1,36 +1,36 @@
-../progs.dat
+./output/progs.dat
 
-./defs.qc
-./subs.qc
-./fight.qc
-./ai.qc
-./combat.qc
-./localization.qc
-./items.qc
-./weapons.qc
-./world.qc
-./client.qc
-./player.qc
-./monsters.qc
-./doors.qc
-./buttons.qc
-./triggers.qc
-./plats.qc
-./misc.qc
+./qcsrc/defs.qc
+./qcsrc/subs.qc
+./qcsrc/fight.qc
+./qcsrc/ai.qc
+./qcsrc/combat.qc
+./qcsrc/localization.qc
+./qcsrc/items.qc
+./qcsrc/weapons.qc
+./qcsrc/world.qc
+./qcsrc/client.qc
+./qcsrc/player.qc
+./qcsrc/monsters.qc
+./qcsrc/doors.qc
+./qcsrc/buttons.qc
+./qcsrc/triggers.qc
+./qcsrc/plats.qc
+./qcsrc/misc.qc
 
-./monsters/ogre.qc
-./monsters/fiend.qc
-./monsters/shambler.qc
-./monsters/knight.qc
-./monsters/grunt.qc
-./monsters/scrag.qc
-./monsters/rottweiler.qc
-./monsters/zombie.qc
-./monsters/chthon.qc
+./qcsrc/monsters/ogre.qc
+./qcsrc/monsters/fiend.qc
+./qcsrc/monsters/shambler.qc
+./qcsrc/monsters/knight.qc
+./qcsrc/monsters/grunt.qc
+./qcsrc/monsters/scrag.qc
+./qcsrc/monsters/rottweiler.qc
+./qcsrc/monsters/zombie.qc
+./qcsrc/monsters/chthon.qc
 
-./monsters/spawn.qc			// registered
-./monsters/hellknight.qc	// registered
-./monsters/rotfish.qc		// registered
-./monsters/vore.qc			// registered
-./monsters/enforcer.qc		// registered
-./monsters/shub.qc			// registered
+./qcsrc/monsters/spawn.qc			// registered
+./qcsrc/monsters/hellknight.qc	// registered
+./qcsrc/monsters/rotfish.qc		// registered
+./qcsrc/monsters/vore.qc			// registered
+./qcsrc/monsters/enforcer.qc		// registered
+./qcsrc/monsters/shub.qc			// registered
